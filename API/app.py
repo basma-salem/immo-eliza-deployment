@@ -1,7 +1,7 @@
 from fastapi import FastAPI ,  HTTPException
 from pydantic import BaseModel
 from typing import Literal , Optional
-from API.predict import predictions
+from predict import predictions
 
     
 

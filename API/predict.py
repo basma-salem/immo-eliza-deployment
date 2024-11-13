@@ -1,6 +1,6 @@
 import pandas as pd
 import joblib
-from API.Preprocessing import DataProcessor
+from Preprocessing import DataProcessor
 
 def predictions(input_data):
     model = joblib.load('API\\xgboost_model.joblib')
