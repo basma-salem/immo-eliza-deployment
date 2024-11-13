@@ -7,15 +7,14 @@ RUN mkdir /app
 # Set the working directory
 WORKDIR /app
 
-# Copy requirements.txt from the root folder
-COPY ../requirements.txt /app/
+COPY requirements.txt /app/
 
-# Copy the entire API folder contents into /app
-COPY . /app/
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-# Install dependencies
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy application's code into the container at /app
+COPY api/ /app/
+
 
 # Expose the port FastAPI will run 
 EXPOSE 8000
