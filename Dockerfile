@@ -11,7 +11,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Copy application's code into the container at /app
-COPY api/ /app/
+COPY API/ /app/
 
 
 # Run the app
