@@ -3,7 +3,7 @@ import joblib
 from Preprocessing import DataProcessor
 
 def predictions(input_data):
-    model = joblib.load('API\\xgboost_model.joblib')
+    model = joblib.load('xgboost_model.joblib')
     
     preprocessor = DataProcessor()
     preprocessed_data = preprocessor.preprocess(input_data)
