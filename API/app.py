@@ -29,7 +29,7 @@ class PropertyData(BaseModel):
     state_building:Literal['AS_NEW', 'JUST_RENOVATED','GOOD','TO_RESTORE','TO_BE_DONE_UP', 'TO_RENOVATE']
     heating_type:Literal['GAS','ELECTRIC','SOLAR','CARBON','WOOD','PELLET','FUELOIL']
     epc:Literal['A++','A+','A','B','C','D','E','F', 'G' ]
-    nbr_frontages:Optional[float]= 0
+    nbr_frontages:Optional[int]= 0
     terrace_sqm: Optional[float]= 0
     garden_sqm:Optional[float]= 0
     
