@@ -9,7 +9,3 @@ def predictions(input_data):
     preprocessed_data = preprocessor.preprocess(input_data)
     prediction = model.predict(preprocessed_data)
     return {"prediction": f"{float(prediction[0]):.2f} €"}
-
-    
-
-    

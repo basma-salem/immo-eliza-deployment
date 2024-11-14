@@ -5,7 +5,7 @@ class DataProcessor:
 
     def Preprocess_categorical_features(self,input):
         # Map the 'property_type' column to an ordinal scale
-        property_type = {'HOUSE': 1, 'APPARTMENT': 0}
+        property_type = {'HOUSE': 1, 'APARTMENT': 0}
         if 'property_type' in input.columns:
             input['property_type'] = input['property_type'].map(property_type).fillna(-1)
 

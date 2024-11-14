@@ -11,14 +11,14 @@ app = FastAPI()
 async def base():
     return {"message": "alive"}
 
-EXPECTED_FEATURE_ORDER = ['zip_code', 'total_area_sqm', 'surface_land_sqm', 'nbr_frontages', 
+Features_orders = ['zip_code', 'total_area_sqm', 'surface_land_sqm', 'nbr_frontages', 
  'nbr_bedrooms', 'terrace_sqm', 'garden_sqm',
- 'property_type', 'state_building', 'heating_type', 
-    'province','epc'
+ 'property_type', 'state_building', 'heating_type'
+  ,'epc' , 'province'
 ]
 
 class PropertyData(BaseModel):
-    property_type: Literal['APPARTMENT', 'HOUSE']
+    property_type: Literal['APARTMENT', 'HOUSE']
     province: Literal[ 'Brussels','East Flanders','Flemish Brabant',
               'Hainaut','Limburg','Liège', 'Luxembourg', 'Namur',
                'Walloon Brabant','West Flanders', 'Antwerp' ]
@@ -26,21 +26,18 @@ class PropertyData(BaseModel):
     total_area_sqm: Optional[int]= 0
     nbr_bedrooms: int
     surface_land_sqm: Optional[float]= 0
-    state_building:Literal['TO_RESTORE','TO_BE_DONE_UP', 'TO_RENOVATE', 'JUST_RENOVATED','GOOD','AS_NEW']
-    heating_type:Literal['CARBON','WOOD','PELLET','FUELOIL','GAS','ELECTRIC','SOLAR']
-    epc:Literal['G', 'F', 'E', 'D','C','B','A','A+','A++']
+    state_building:Literal['AS_NEW', 'JUST_RENOVATED','GOOD','TO_RESTORE','TO_BE_DONE_UP', 'TO_RENOVATE']
+    heating_type:Literal['GAS','ELECTRIC','SOLAR','CARBON','WOOD','PELLET','FUELOIL']
+    epc:Literal['A++','A+','A','B','C','D','E','F', 'G' ]
     nbr_frontages:Optional[float]= 0
     terrace_sqm: Optional[float]= 0
     garden_sqm:Optional[float]= 0
-    state_building:Literal['AS_NEW','TO_RESTORE','TO_BE_DONE_UP', 'TO_RENOVATE', 'JUST_RENOVATED','GOOD']
-    heating_type:Literal['GAS','CARBON','WOOD','PELLET','FUELOIL','ELECTRIC','SOLAR']
-    epc:Literal['G', 'F', 'E', 'D','C','B','A','A+','A++']
     
 @app.post("/predict")
 async def predictPrice(data: PropertyData):
     try:
         input_data = data.model_dump()
-        reordered_data = {feature: input_data[feature] for feature in EXPECTED_FEATURE_ORDER}
+        reordered_data = {feature: input_data[feature] for feature in Features_orders}
         return predictions(reordered_data)
     except ValueError as e:
         # Handle invalid input values
