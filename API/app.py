@@ -12,10 +12,9 @@ async def base():
     return {"message": "alive"}
 
 Features_orders = ['zip_code', 'total_area_sqm', 'surface_land_sqm', 'nbr_frontages', 
- 'nbr_bedrooms', 'terrace_sqm', 'garden_sqm',
- 'property_type', 'state_building', 'heating_type'
-  ,'epc' , 'province'
-]
+                    'nbr_bedrooms', 'terrace_sqm', 'garden_sqm','primary_energy_consumption_sqm',
+                    'property_type', 'state_building', 'heating_type','province'
+                        ]
 
 class PropertyData(BaseModel):
     property_type: Literal['APARTMENT', 'HOUSE']
@@ -28,7 +27,7 @@ class PropertyData(BaseModel):
     surface_land_sqm: Optional[float]= 0
     state_building:Literal['AS_NEW', 'JUST_RENOVATED','GOOD','TO_RESTORE','TO_BE_DONE_UP', 'TO_RENOVATE']
     heating_type:Literal['GAS','ELECTRIC','SOLAR','CARBON','WOOD','PELLET','FUELOIL']
-    epc:Literal['A++','A+','A','B','C','D','E','F', 'G' ]
+    primary_energy_consumption_sqm: Optional[int]= 200
     nbr_frontages:Optional[int]= 0
     terrace_sqm: Optional[float]= 0
     garden_sqm:Optional[float]= 0

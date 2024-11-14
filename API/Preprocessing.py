@@ -10,11 +10,10 @@ class DataProcessor:
             input['property_type'] = input['property_type'].map(property_type).fillna(-1)
 
         provinces = [
-             'province_Brussels','province_East Flanders','province_Flemish Brabant',
+             'province_Antwerp','province_Brussels','province_East Flanders','province_Flemish Brabant', 
               'province_Hainaut','province_Limburg','province_Liège', 'province_Luxembourg', 'province_Namur',
-               'province_Walloon Brabant','province_West Flanders'
-               #, 'province_Antwerp'
-        ]
+               'province_Walloon Brabant','province_West Flanders']
+        
         if 'province' in input.columns:
             input['province'] = input['province'].str.lower()
             
@@ -37,14 +36,6 @@ class DataProcessor:
         # Convert to DataFrame to allow fillna
         input['state_building'] = pd.Series(
             encoder_building.fit_transform(input[['state_building']]).flatten()
-        ).fillna(-1)
-
-        epc_hierarchy = ['G', 'F', 'E', 'D', 'C', 'B', 'A', 'A+', 'A++']
-        encoder_epc = OrdinalEncoder(categories=[epc_hierarchy])
-
-        # Convert to DataFrame or Series to apply fillna
-        input['epc'] = pd.Series(
-            encoder_epc.fit_transform(input[['epc']]).flatten()
         ).fillna(-1)
 
         # Map 'heating_type' to an ordinal scale
